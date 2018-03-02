@@ -3,9 +3,10 @@
 import json
 
 
-def make(filename='config.json', path='', data={}):
+def make(filename='config.json', path='', data={'key': 'value'}):
     """Make a file at the system path specified, or where run from."""
     path_and_name = '{p}{f}'.format(p=path, f=filename)
     config = open(path_and_name, 'w')
+    data = json.dumps(data)
     config.write(str(data))
-    return path_and_name
+    return {path_and_name: data}
