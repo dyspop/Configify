@@ -3,7 +3,7 @@
 import json
 
 
-def __generate_json_from_template(template):
+def __generate_config_dict(template):
     """Generate a json config at the system path based on the template dict."""
     new_config = {}
     for k, v in template.items():
@@ -18,7 +18,7 @@ def __generate_json_from_template(template):
 
 def make(filename='config.json', path='', data={}):
     """Make a file at the system path specified, or where run from."""
-    __generate_json_from_template(template=data)
+    __generate_config_dict(template=data)
     path_and_name = '{p}{f}'.format(p=path, f=filename)
     config = open(path_and_name, 'w')
     data = json.dumps(data)
