@@ -16,17 +16,19 @@ You put this code in your app/package
 
     import Configify
     template = {
-        'username': '',
-        'password': ''
+        'username': 'default',
+        'password': 'anotherdefault'
     }   
     Configify.make(template)
 
 and the user will be prompted with
 
-    >>>'username': 🔑
-    Set username to **** in config.json
-    >>>'password': 🔑
-    Set password to **** in config.json
+    >>>Enter value for "username": 
+    🔑
+    Set username to ******** in config.json
+    >>>Enter value for "password":
+    🔑
+    Set password to ************ in config.json
 
 and generate a `config.json` file:
 
@@ -46,27 +48,40 @@ But you can change any of that:
 Configify.make(data=template, filename='secret.json')
 ```
 ```
-Configify.make(data=template, secret=False)
->>>'username': ▋
-Set user to someusername in config.json
->>>'password': ▋
-Set password to somepassword in config.json
+>>>Configify.make(data=template, secret=False)
+Enter value for "username"
+(return for default "someusername")': 
+▋userinput
+Set "username" to "userinput" in config.json
+Enter value for "password"
+(return for default "somepassword")': 
+▋otheruserinput
+Set "password" to "otheruserinput" in config.json
 ```
 ```
-Configify.make(data=template, path='~/Configs/')
->>>'username': 🔑
-Set username to ************ in ~/Configs/config.json
->>>'password': 🔑
-Set password to ************ in ~/Configs/config.json
+>>>Configify.make(data=template, path='~/Configs/')
+Enter value for "username"
+(return for default "*******")': 
+🔑
+Set "username" to "***********" in config.json
+Enter value for "password"
+(return for default "***********")': 
+🔑
+Set "password" to "*****" in ~/Configs/config.json
 ```
 ```
-Configify.make(data=template, get=True)
->>>'username': 🔑
-Set username to **** in config.json
->>>'password': 🔑
-Set password to **** in config.json
-{'template': {'username': 'someusername', password: 'somepassword'}}
+>>>Configify.make(data=template, get=True')
+Enter value for "username"
+(return for default "*******")': 
+🔑
+Set "username" to "***********" in config.json
+Enter value for "password"
+(return for default "***********")': 
+🔑
+Set "password" to "*****" in config.json
+{'template': {'username': 'userinput', password: 'otheruserinput'}}
 ```
+
 
 ## Contributing
 
