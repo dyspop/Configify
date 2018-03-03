@@ -39,13 +39,22 @@ By default Configify assumes a few things:
 * You want the file to be named `config.json`
 * Your inputs are secret
 * You want the file generated at the path the python code that executes it runs from
-* You don't want to return the configuration data to the application context.
+* You don't want to return the configuration data to the application context
+* You want the obscuring character to be an asterisk
 
 But you can change any of that:
 
 
 ```
-Configify.make(data=template, filename='secret.json')
+>>>Configify.make(data=template, filename='secret.json')
+Enter value for "username"
+(return for default "*******")': 
+🔑
+Set "username" to "***********" in secret.json
+Enter value for "password"
+(return for default "***********")': 
+🔑
+Set "password" to "*****" in secret.json
 ```
 ```
 >>>Configify.make(data=template, secret=False)
@@ -81,7 +90,15 @@ Enter value for "password"
 Set "password" to "*****" in config.json
 {'template': {'username': 'userinput', password: 'otheruserinput'}}
 ```
-
+```
+>>>Configify.make(data=template, char='☃')
+>>>Enter value for "username": 
+🔑
+Set username to ☃☃☃☃☃☃☃☃ in config.json
+>>>Enter value for "password":
+🔑
+Set password to ☃☃☃☃☃☃☃☃☃☃☃☃ in config.json
+```
 
 ## Contributing
 
