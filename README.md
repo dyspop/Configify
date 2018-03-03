@@ -33,7 +33,7 @@ and the user will be prompted with
 
 and generate a `config.json` file:
 
-    {"username": "someuser", "password": "somepassword"}
+    {"username": "frominputabove", "password": "alsofrominputabove"}
 
 By default Configify assumes a few things:
 
