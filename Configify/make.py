@@ -73,12 +73,19 @@ def make(
         char='*'
     ):
     """Make a file at the system path specified, or where run from."""
+    # set the data to the return of our generator with all the user options passed through
     data = __generate_config_dict(template=data, secret=secret, filename=filename, char=char)
+    # format the save destination
     path_and_name = '{p}{f}'.format(p=path, f=filename)
+    # write the actual config file
     config = open(path_and_name, 'w')
+    # format the data as json
     data = json.dumps(data)
+    # write the json data to the file
     config.write(str(data))
     if get is True:
+        # return the data only if the user wants it
         return {path_and_name: data}
     else:
+        # don't return by default after we've gone through all that trouble to obscure things.
         pass
