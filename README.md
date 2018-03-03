@@ -44,6 +44,7 @@ But you can change any of that:
     Configify.make(data=template, filename='secret.json')
 
 
+
     Configify.make(data=template, secret=False)
     >>>'username': ▋
     Set user to someusername in config.json
@@ -51,11 +52,13 @@ But you can change any of that:
     Set password to somepassword in config.json
 
 
+
     Configify.make(data=template, path='~/Configs/')
     >>>'username': 🔑
     Set username to ************ in ~/Configs/config.json
     >>>'password': 🔑
     Set password to ************ in ~/Configs/config.json
+
 
 
     Configify.make(data=template, get=True)
