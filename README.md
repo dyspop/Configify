@@ -26,10 +26,10 @@ and the user will be prompted with
 
     >>>Enter value for "username": 
     🔑
-    Set username to ******** in config.json
+    Set username to ************** in config.json
     >>>Enter value for "password":
     🔑
-    Set password to ************ in config.json
+    Set password to ****************** in config.json
 
 and generate a `config.json` file:
 
