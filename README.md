@@ -18,7 +18,7 @@ You put this code in your app/package
     template = {'username': 'default', 'password': 'anotherdefault'}   
     Configify.make(template)
 
-To generate a configuration the first time the app/package is run and load it into the app context otherwise just use:
+To generate a configuration and load it into the app context otherwise just use:
 
     config = Configify.make(template, get=True)
 
