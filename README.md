@@ -92,13 +92,13 @@ Set "password" to "*****" in config.json
 {'template': {'username': 'userinput', password: 'otheruserinput'}}
 ```
 ```
->>>Configify.make(data=template, char='☃')
+>>>Configify.make(data=template, char='ﷺ')
 >>>Enter value for "username": 
 🔑
-Set username to "☃☃☃☃☃☃☃☃" in config.json
+Set username to "ﷺﷺﷺﷺﷺﷺﷺﷺﷺ" in config.json
 >>>Enter value for "password":
 🔑
-Set password to "☃☃☃☃☃☃☃☃☃☃☃☃" in config.json
+Set password to "ﷺﷺﷺﷺﷺﷺﷺﷺﷺﷺ" in config.json
 ```
 
 ## Contributing
