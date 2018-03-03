@@ -57,7 +57,9 @@ def __generate_config_dict(template, secret, filename, char):
             # if not don't obscure it
             else:
                 v_display = new_config[k]
-            # print the results
+            # print the results, but delete the extra line from the user if they entered the default
+            if v == new_config[k]:
+                print('\033[F')
             print("Set \"{k}\" to \"{v}\" in {f}".format(k=k, v=v_display, f=filename))
             return new_config
     else:
@@ -85,7 +87,11 @@ def make(
     config.write(str(data))
     if get is True:
         # return the data only if the user wants it
-        return {path_and_name: data}
+        if sys.stdout.isatty() and secret is True:
+            # but not to terminal when secret of course
+            pass
+        else:
+            return {path_and_name: data}
     else:
         # don't return by default after we've gone through all that trouble to obscure things.
         pass
