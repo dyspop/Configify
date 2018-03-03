@@ -13,7 +13,14 @@ Configify  Copyright (C) 2018  Dan Black
 import json
 import getpass
 import sys
+from pathlib import Path
 
+def __is_well_formed(f, format='json'):
+    try:
+        json.load(open(f))
+    except:
+        return False
+    return True
 
 def __obscure(string, char='*'):
     """Obscure the data for display."""
@@ -72,13 +79,16 @@ def make(
         path='',
         secret=True,
         get=False,
-        char='*'
+        char='*',
+        format='json'
     ):
     """Make a file at the system path specified, or where run from."""
-    # set the data to the return of our generator with all the user options passed through
-    data = __generate_config_dict(template=data, secret=secret, filename=filename, char=char)
     # format the save destination
     path_and_name = '{p}{f}'.format(p=path, f=filename)
+    # then check if the file is present and validated
+    # TODO: how to handle the file being present and valid
+    # set the data to the return of our generator with all the user options passed through
+    data = __generate_config_dict(template=data, secret=secret, filename=filename, char=char)
     # write the actual config file
     config = open(path_and_name, 'w')
     # format the data as json
