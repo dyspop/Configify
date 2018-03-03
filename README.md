@@ -94,10 +94,10 @@ Set "password" to "*****" in config.json
 >>>Configify.make(data=template, char='☃')
 >>>Enter value for "username": 
 🔑
-Set username to ☃☃☃☃☃☃☃☃ in config.json
+Set username to "☃☃☃☃☃☃☃☃" in config.json
 >>>Enter value for "password":
 🔑
-Set password to ☃☃☃☃☃☃☃☃☃☃☃☃ in config.json
+Set password to "☃☃☃☃☃☃☃☃☃☃☃☃" in config.json
 ```
 
 ## Contributing
