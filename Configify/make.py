@@ -20,14 +20,22 @@ def __generate_config_dict(template, secret, filename):
     for k, v in template.items():
         if secret is True:
             func = getpass.getpass
+            if v != ('' or None or False):
+                prompt = "Enter value for \"{k}\"\n(return for default \"{v}\")': ".format(
+                    k=k, v=__obscure(v))
+            else:
+                prompt = "'{k}: ".format(k=k)
         else:
             func = input
-        new_config[k] = func("'{k}': ".format(k=k)) or v
+            prompt = "Enter value for \"{k}\"\n(return for default \"{v}\")': ".format(
+                k=k, v=v)
+        print(prompt)
+        new_config[k] = func() or v
         if secret is True:
-            v = __obscure(new_config[k])
+            v_display = __obscure(new_config[k])
         else:
-            v = new_config[k]
-        print("Set {k} to {v} in {f}".format(k=k, v=v, f=filename))
+            v_display = new_config[k]
+        print("Set \"{k}\" to \"{v}\" in {f}".format(k=k, v=v_display, f=filename))
         return new_config
 
 
