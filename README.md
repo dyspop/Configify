@@ -14,51 +14,53 @@ not yet...
 
 You put this code in your app/package
 
-```diff
-+ import Configify
-+
-+ template = {
-+    'username': '',
-+    'password': ''
-+ }
-+
-+ Configify.make(template)
-```
+    import Configify
+    template = {
+        'username': '',
+        'password': ''
+    }   
+    Configify.make(template)
 
 and the user will be prompted with
 
-```diff
-- 'username': 🔑
-- Set username to **** in config.json
-- 'password': 🔑
-- Set password to **** in config.json
+    >>>'username': 🔑
+    Set username to **** in config.json
+    >>>'password': 🔑
+    Set password to **** in config.json
 
-```
+and generate a `config.json` file:
 
-This will prompt the user for input and generate a `config.json`:
-
-```
-{"username": "whatevertheuserentered"}
-```
+    {"username": "someuser", "password": "somepassword"}
 
 By default Configify assumes a few things:
 
+* You want the file to be named `config.json`
 * Your inputs are secret
 * You want the file generated at the path the python code that executes it runs from
 * You don't want to return the configuration data to the application context.
 
-But you can change that:
+But you can change any of that:
 
-```diff
-+ Configify.make(template, secret=False)
-```
-```diff
-- 'username': ▋
-- Set user to adifferetpassword in config.json
-- 'password': ▋
-- Set user to adifferetpassword in config.json
+    Configify.make(data=template, filename='secret.json')
 
 
-    Configify.make(template, path='~/Configs/')
-    Configify.make(template, get=True)
-    {'template': {'username': 'bobsyouruncle', password: 'steppintime'}}
+    Configify.make(data=template, secret=False)
+    >>>'username': ▋
+    Set user to someusername in config.json
+    >>>'password': ▋
+    Set password to somepassword in config.json
+
+
+    Configify.make(data=template, path='~/Configs/')
+    >>>'username': 🔑
+    Set username to ************ in ~/Configs/config.json
+    >>>'password': 🔑
+    Set password to ************ in ~/Configs/config.json
+
+
+    Configify.make(data=template, get=True)
+    >>>'username': 🔑
+    Set username to **** in config.json
+    >>>'password': 🔑
+    Set password to **** in config.json
+    {'template': {'username': 'someusername', password: 'somepassword'}}
