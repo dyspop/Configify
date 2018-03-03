@@ -2,27 +2,44 @@
 
 The app and package config generator package developed for developers who develop apps and/or packages.
 
+Are you sick and tired of writing packages or apps that are super great but don't work unless your end-user scours your README for instructions on how to structure config files and how and where to instantiate them? 
+
+Configify allows you to ship code and have the end-user developer install and configure it. You can call it from setup.py or bind it to whatever you like in your code.
+
 ## Installation
 
 not yet...
 
 ## Usage
 
-<span style="color: CornflowerBlue;">
+You put this code in your app/package
 
-    import Configify
+```diff
++ import Configify
++
++ template = {
++    'username': '',
++    'password': ''
++ }
++
++ Configify.make(template)
+```
 
-    template = {
-        'username': '',
-        'password': ''
-    }
+and the user will be prompted with
 
-</span><span style="color: LightSeaGreen;">
+```diff
+- 'username': 🔑
+- Set username to **** in config.json
+- 'password': 🔑
+- Set password to **** in config.json
 
-    Configify.make(template)
+```
 
-</span>
-This will prompt the user for input and generate a `config.json`.
+This will prompt the user for input and generate a `config.json`:
+
+```
+{"username": "whatevertheuserentered"}
+```
 
 By default Configify assumes a few things:
 
@@ -32,7 +49,16 @@ By default Configify assumes a few things:
 
 But you can change that:
 
-    Configify.make(template, secret=False)
+```diff
++ Configify.make(template, secret=False)
+```
+```diff
+- 'username': ▋
+- Set user to adifferetpassword in config.json
+- 'password': ▋
+- Set user to adifferetpassword in config.json
+
+
     Configify.make(template, path='~/Configs/')
     Configify.make(template, get=True)
     {'template': {'username': 'bobsyouruncle', password: 'steppintime'}}
