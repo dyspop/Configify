@@ -67,3 +67,7 @@ Set username to **** in config.json
 Set password to **** in config.json
 {'template': {'username': 'someusername', password: 'somepassword'}}
 ```
+
+## Contributing
+
+Fork the source repository https://github.com/dyspop/Configify make a new branch and submit a pull request.
