@@ -16,16 +16,12 @@ import getpass
 import sys
 
 
-def __obscure(string):
+def __obscure(string, char='*'):
     """Obscure the data for display."""
-    deplorables = ["[", "]", "'", ",", " "]
-    obscured = str(['*' for char in string])
-    for deplorable in deplorables:
-        obscured = obscured.replace(deplorable, '')
-    return obscured
+    return char * len(string)
 
 
-def __generate_config_dict(template, secret, filename):
+def __generate_config_dict(template, secret, filename, char):
     """Generate a json config at the system path based on the template dict."""
     # Don't do stuff unless we got a dict
     if isinstance(template, dict):
@@ -40,7 +36,7 @@ def __generate_config_dict(template, secret, filename):
                 if v != ('' or None or False):
                     # if there is then prompt with the default but obscured
                     prompt = "Enter value for \"{k}\"\n(return for default \"{v}\")': ".format(
-                        k=k, v=__obscure(v))
+                        k=k, v=__obscure(v, char))
                 else:
                     # but if there isn't one then obviously don't try to display it
                     prompt = "'{k}: ".format(k=k)
@@ -57,7 +53,7 @@ def __generate_config_dict(template, secret, filename):
             new_config[k] = func() or v
             # check secretness again, if so set the new value's display version to be obscured
             if secret is True:
-                v_display = __obscure(new_config[k])
+                v_display = __obscure(new_config[k], char)
             # if not don't obscure it
             else:
                 v_display = new_config[k]
@@ -68,9 +64,16 @@ def __generate_config_dict(template, secret, filename):
         return None
 
 
-def make(data={}, filename='config.json', path='', secret=True, get=False):
+def make(
+        data={},
+        filename='config.json',
+        path='',
+        secret=True,
+        get=False,
+        char='*'
+    ):
     """Make a file at the system path specified, or where run from."""
-    data = __generate_config_dict(template=data, secret=secret, filename=filename)
+    data = __generate_config_dict(template=data, secret=secret, filename=filename, char=char)
     path_and_name = '{p}{f}'.format(p=path, f=filename)
     config = open(path_and_name, 'w')
     data = json.dumps(data)
