@@ -30,8 +30,9 @@ def test_make_makes_json_file_by_eof():
     os.remove('{p}{f}'.format(p=path, f=filename))
 
 
-def test_make_makes_json_actually():
+def test_make_makes_json_actually(monkeypatch):
     """Did the file we wrote actually become json."""
+    monkeypatch.setattr('getpass.getpass', lambda x: "baz")
     Configify.make(path=path, data={"foo": "bar"})
     config_file = '{p}{f}'.format(p=path, f=filename)
     assert json.load(open(config_file))
