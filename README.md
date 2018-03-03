@@ -1,6 +1,6 @@
 # Configify
 
-The app/package config generator package developed for developers who develop apps/packages and developers who develop apps/packages for developers! 
+The app and package config generator package developed for developers who develop apps and/or packages.
 
 ## Installation
 
