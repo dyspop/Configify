@@ -8,6 +8,8 @@ not yet...
 
 ## Usage
 
+<span style="color: CornflowerBlue;">
+
     import Configify
 
     template = {
@@ -15,8 +17,11 @@ not yet...
         'password': ''
     }
 
+</span><span style="color: LightSeaGreen;">
+
     Configify.make(template)
 
+</span>
 This will prompt the user for input and generate a `config.json`.
 
 By default Configify assumes a few things:
