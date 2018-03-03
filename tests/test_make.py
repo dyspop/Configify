@@ -29,6 +29,6 @@ def test_make_makes_json_file_by_eof():
 
 def test_make_makes_json_actually():
     Configify.make(path=path, data={"foo": "bar"})
-    # config_file = '{p}{f}'.format(p=path, f=filename)
-    # assert json.load(open(config_file))
-    # os.remove(config_file)
+    config_file = '{p}{f}'.format(p=path, f=filename)
+    assert json.load(open(config_file))
+    os.remove(config_file)
