@@ -1,4 +1,15 @@
-"""Actually makes the configuration file."""
+"""Actually makes the configuration file.
+
+Configify  Copyright (C) 2018  Dan Black
+    This program comes with ABSOLUTELY NO WARRANTY; 
+    This is free software, and you are welcome to redistribute it
+    under certain conditions; For details see license.txt
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+"""
+
+
 
 import json
 import getpass

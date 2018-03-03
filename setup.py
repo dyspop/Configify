@@ -5,7 +5,7 @@ long_description='A package for developers who want to offer other end-user-deve
 url='https://github.com/dyspop/Configify',
 author='Dan Black',
 author_email='dyspop@gmail.com',
-license='MIT',
+license='GPL-3.0+',
 classifiers=[
     'Development Status :: 3 - Alpha',
     'Intended Audience :: Developers',
@@ -21,7 +21,7 @@ classifiers=[
     'Programming Language :: Python :: 3.5',
     'Programming Language :: Python :: 3.6',
 ],
-keywords='config configuration generator dev tool json',
+keywords=['config', 'configuration generator', 'dev tool', 'json'],
 project_urls={ 'Documentation': 'https://github.com/dyspop/Configify/README.md' },
 packages=find_packages(['json', 'os'], exclude=['tests*']),
 install_requires=[],
