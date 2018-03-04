@@ -13,7 +13,7 @@ Configify  Copyright (C) 2018  Dan Black
 import json
 import getpass
 import sys
-from pathlib import Path
+
 
 def __is_well_formed(f, format='json'):
     try:
@@ -68,7 +68,7 @@ def __generate_config_dict(template, secret, filename, char):
             if v == new_config[k]:
                 print('\033[F')
             print(set_confirmation_text.format(k=k, v=v_display, f=filename))
-            return new_config
+        return new_config
     else:
         return None
 
