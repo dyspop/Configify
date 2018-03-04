@@ -15,7 +15,12 @@ not yet...
 You put this code in your app/package
 
     import Configify
-    template = {'username': 'default', 'password': 'anotherdefault'}   
+
+    template = {
+        'username': 'default',
+        'password': 'anotherdefault'
+    }
+
     Configify.make(template)
 
 To generate a configuration and load it into the app context otherwise just use:
