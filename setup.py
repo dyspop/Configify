@@ -23,5 +23,5 @@ classifiers=[
 ],
 keywords=['config', 'configuration generator', 'dev tool', 'json'],
 project_urls={ 'Documentation': 'https://github.com/dyspop/Configify/README.md' },
-packages=find_packages(['json', 'os'], exclude=['tests*']),
+packages=find_packages([]),
 install_requires=[],
