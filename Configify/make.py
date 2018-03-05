@@ -15,13 +15,14 @@ import getpass
 import sys
 
 
-def __is_well_formed(f, format='json'):
-    try:
-        json.load(open(f))
-    except:
+def __sys_file_matches_data_template(f, data, format='json'):
+    if format == 'json':
+        data_from_sys = json.load(open(f))
+    if data_from_sys == data:
+        return True
+    else:
         return False
-    return True
-
+    
 def __obscure(string, char='*'):
     """Obscure the data for display."""
     return char * len(string)
@@ -86,22 +87,24 @@ def make(
     # format the save destination
     path_and_name = '{p}{f}'.format(p=path, f=filename)
     # then check if the file is present and validated
-    # TODO: how to handle the file being present and valid
-    # set the data to the return of our generator with all the user options passed through
-    data = __generate_config_dict(template=data, secret=secret, filename=filename, char=char)
-    # write the actual config file
-    config = open(path_and_name, 'w')
-    # format the data as json
-    data = json.dumps(data)
-    # write the json data to the file
-    config.write(str(data))
-    if get is True:
-        # return the data only if the user wants it
-        if sys.stdout.isatty() and secret is True:
-            # but not to terminal when secret of course
-            pass
+    if __sys_file_matches_data_template(f=path_and_name, data=data, format=format) is True:
+        # set the data to the return of our generator with all the user options passed through
+        data = __generate_config_dict(template=data, secret=secret, filename=filename, char=char)
+        # write the actual config file
+        config = open(path_and_name, 'w')
+        # format the data as json
+        data = json.dumps(data)
+        # write the json data to the file
+        config.write(str(data))
+        if get is True:
+            # return the data only if the user wants it
+            if sys.stdout.isatty() and secret is True:
+                # but not to terminal when secret of course
+                pass
+            else:
+                return {path_and_name: data}
         else:
-            return {path_and_name: data}
+            # don't return by default after we've gone through all that trouble to obscure things.
+            pass
     else:
-        # don't return by default after we've gone through all that trouble to obscure things.
         pass
