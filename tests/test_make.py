@@ -12,6 +12,19 @@ outpath = '{p}{fn}.{fmt}'.format(p=path, fn=filename, fmt=format)
 data = {'spam': 'ni', 'ham': 'eggs'}
 
 
+def setup_module(module):
+    """Set up any state specific to the execution of the given module."""
+    pass
+
+
+def teardown_module(module):
+    """Tear down any state that was previously setup with a setup_module."""
+    try:
+        os.remove(outpath)
+    except OSError:
+        pass
+
+
 def test_args_none():
     """Should return TypeError."""
     with pytest.raises(TypeError):
