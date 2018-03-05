@@ -15,15 +15,34 @@ import getpass
 import sys
 
 
+def __generate_file(data, outpath):
+    f = open(outpath, 'w')
+    f.write(str(data))
+
+
 def make(
-        data={},
-        filename='config.json',
+        data,
+        filename='config',
         path='',
         secret=True,
         get=False,
-        char='*',
-        format='json'):
+        char='*'):
     """Make a file at the system path specified, or where run from."""
-    # format the save destination
-    path_and_name = '{p}{f}'.format(p=path, f=filename)
-    return {path_and_name: data}
+    # Variables formatting
+    # we only support json, but should abstract for later.
+    format = 'json'
+    outpath = '{p}{fn}.{fmt}'.format(p=path, fn=filename, fmt=format)
+
+    # Custom conditions and error handling
+    # handle data
+    if not isinstance(data, dict):
+        raise TypeError("'data' argument must be a python dictionary.")
+
+    __generate_file(data, outpath)
+
+    # Contextualized returns before default return
+    # handle get
+    if get is False:
+        return None
+
+    return {outpath: data}
