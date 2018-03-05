@@ -78,7 +78,7 @@ def test_file_creation_args_minimal_viable():
     assert os.path.exists(outpath)
 
 
-
-# def test_file_is_written():
-#     """We should write a file if above tests pass."""
-
+def test_file_is_valid_format_json():
+    """We should get a valid json file created."""
+    Configify.make(data=data)
+    assert json.load(outpath)
