@@ -15,9 +15,9 @@ import getpass
 import sys
 
 
-def __generate_file(data, outpath):
+def __generate_file(data, outpath, format):
     f = open(outpath, 'w')
-    f.write(str(data))
+    f.write(str(json.dumps(data)))
 
 
 def make(
@@ -38,7 +38,7 @@ def make(
     if not isinstance(data, dict):
         raise TypeError("'data' argument must be a python dictionary.")
 
-    __generate_file(data, outpath)
+    __generate_file(data, outpath, format)
 
     # Contextualized returns before default return
     # handle get

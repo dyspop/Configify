@@ -50,12 +50,12 @@ def test_arg_data_none_error():
 
 def test_get_gets_dict():
     """Should get a dict when we supply the get argument."""
-    assert isinstance(Configify.make(data=data, get=True), dict)
+    assert isinstance(Configify.make(data=data, path=path, get=True), dict)
 
 
 def test_arg_filename_blank_returns_config():
     """Should get something called 'config' if there's no argument."""
-    assert 'config' in list(Configify.make(data=data, get=True).keys())[0]
+    assert 'config' in list(Configify.make(data=data, path=path, get=True).keys())[0]
 
 
 def test_arg_filename_supplied_returns_arg_in_returned_dict():
@@ -72,13 +72,13 @@ def test_args_filename_and_path_concat_in_returned_dict():
         ).keys())[0].split('.')[0]
 
 
-def test_file_creation_args_minimal_viable():
-    """We should get a file created so long as we supply data."""
-    Configify.make(data=data)
+def test_file_creation():
+    """We should get a file created."""
+    Configify.make(data=data, path=path)
     assert os.path.exists(outpath)
 
 
 def test_file_is_valid_format_json():
     """We should get a valid json file created."""
-    Configify.make(data=data)
-    assert json.load(outpath)
+    Configify.make(data=data, path=path)
+    assert json.load(open(outpath))
