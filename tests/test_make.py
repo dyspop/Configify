@@ -15,15 +15,7 @@ data = {'spam': 'bacon', 'ham': 'eggs'}
 def setup_function(function):
     """ set up any state that was previously setup with a setup_function call.
     """
-    try:
-        os.remove(outpath)
-    except OSError:
-        pass
-    try:
-        os.remove('tests/spam.json')
-    except OSError:
-        pass
-
+    pass
 
 def teardown_function(function):
     """ tear down any state that was previously setup with a setup_function call.
@@ -33,7 +25,7 @@ def teardown_function(function):
     except OSError:
         pass
     try:
-        os.remove('spam.json')
+        os.remove('tests/spam.json')
     except OSError:
         pass
 
