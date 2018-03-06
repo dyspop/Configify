@@ -100,3 +100,8 @@ def test_arg_force_true_results_in_file():
     Configify.make(data=data, path=path)
     Configify.make(data=data2, path=path, force=True)
     assert os.path.exists(outpath)
+
+
+def test_teardown_tears_down():
+    """If teardown works we should not have a file at this path."""
+    assert not os.path.exists(outpath)
