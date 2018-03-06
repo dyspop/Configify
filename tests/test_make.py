@@ -9,7 +9,7 @@ path = 'tests/'
 filename = 'config'
 format = 'json'
 outpath = '{p}{fn}.{fmt}'.format(p=path, fn=filename, fmt=format)
-data = {'spam': 'ni', 'ham': 'eggs'}
+data = {'spam': 'bacon', 'ham': 'eggs'}
 
 
 def setup_module(module):
@@ -24,6 +24,13 @@ def teardown_module(module):
     except OSError:
         pass
 
+def teardown_function(function):
+    """ teardown any state that was previously setup with a setup_function call.
+    """
+    try:
+        os.remove(outpath)
+    except OSError:
+        pass
 
 def test_args_none():
     """Should return TypeError."""
@@ -40,12 +47,12 @@ def test_arg_data_none_error():
         range(0), range(1),
         '', 'spam',
         b'', b'spam',
-        bytearray(), bytearray(b'\xf0\xf1\xf2'),
+        bytearray(), bytearray(b'\xf0\xf1'),
         {}, {0, 1}
     ]
     with pytest.raises(TypeError):
         for bad_input_data in bad_input_datas:
-            Configify.make(data=bad_input_data)
+            Configify.make(data=None)
 
 
 def test_get_gets_dict():
@@ -65,7 +72,7 @@ def test_arg_filename_supplied_returns_arg_in_returned_dict():
 
 
 def test_args_filename_and_path_concat_in_returned_dict():
-    """We should be combining the args for the file write destination."""
+    """Should combine the args for the file write destination."""
     assert outpath.split('.')[0] == list(
         Configify.make(
             data=data, get=True, filename=filename, path=path
@@ -73,7 +80,7 @@ def test_args_filename_and_path_concat_in_returned_dict():
 
 
 def test_file_creation():
-    """We should get a file created."""
+    """A file should have been created."""
     Configify.make(data=data, path=path)
     assert os.path.exists(outpath)
 
@@ -82,3 +89,13 @@ def test_file_is_valid_format_json():
     """We should get a valid json file created."""
     Configify.make(data=data, path=path)
     assert json.load(open(outpath))
+
+
+def test_if_file_exists_returns_error():
+    """If there is already a file we should not rewrite it."""
+    Configify.make(data=data, path=path)
+    data2 = {'spam': 'baked beans', 'ham': 'sausage'}
+    with pytest.raises(Exception):
+        Configify.make(data=data2, path=path)
+
+

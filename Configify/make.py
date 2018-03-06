@@ -13,6 +13,7 @@ Configify  Copyright (C) 2018  Dan Black
 import json
 import getpass
 import sys
+import os.path
 
 
 def __generate_file(data, outpath, format):
@@ -37,6 +38,10 @@ def make(
     # handle data
     if not isinstance(data, dict):
         raise TypeError("'data' argument must be a python dictionary.")
+
+    # handle file exists
+    if os.path.isfile(outpath):
+        raise Exception("File exists.") 
 
     __generate_file(data, outpath, format)
 
