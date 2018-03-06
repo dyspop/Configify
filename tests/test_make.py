@@ -12,23 +12,15 @@ outpath = '{p}{fn}.{fmt}'.format(p=path, fn=filename, fmt=format)
 data = {'spam': 'bacon', 'ham': 'eggs'}
 
 
-def setup_module(module):
-    """Set up any state specific to the execution of the given module."""
-    pass
-
-
-def teardown_module(module):
-    """Tear down any state that was previously setup with a setup_module."""
-    try:
-        os.remove(outpath)
-    except OSError:
-        pass
-
 def teardown_function(function):
     """ teardown any state that was previously setup with a setup_function call.
     """
     try:
         os.remove(outpath)
+    except OSError:
+        pass
+    try:
+        os.remove('spam.json')
     except OSError:
         pass
 
