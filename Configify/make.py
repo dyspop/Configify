@@ -25,7 +25,8 @@ def make(
         data,
         filename='config',
         path='',
-        get=False):
+        get=False,
+        force=False):
     """Make a file at the system path specified, or where run from."""
     # Variables formatting
     # we only support json, but should abstract for later.
@@ -38,7 +39,7 @@ def make(
         raise TypeError("'data' argument must be a python dictionary.")
 
     # handle file exists
-    if os.path.isfile(outpath):
+    if os.path.isfile(outpath) and force is False:
         raise Exception("File {f} exists. Use Configify.make(force=True) to override.".format(f=outpath))
 
     __generate_file(data, outpath, format)

@@ -10,10 +10,10 @@ filename = 'config'
 format = 'json'
 outpath = '{p}{fn}.{fmt}'.format(p=path, fn=filename, fmt=format)
 data = {'spam': 'bacon', 'ham': 'eggs'}
-
+data2 = {'spam': 'baked beans', 'ham': 'sausage'}
 
 def setup_function(function):
-    """Set up any state that was previously setup with a setup_function call."""
+    """Set up a new state."""
     pass
 
 
@@ -91,6 +91,12 @@ def test_file_is_valid_format_json():
 def test_if_file_exists_returns_error():
     """If there is already a file we should not rewrite it."""
     Configify.make(data=data, path=path)
-    data2 = {'spam': 'baked beans', 'ham': 'sausage'}
     with pytest.raises(Exception):
         Configify.make(data=data2, path=path)
+
+
+def test_arg_force_true_results_in_file():
+    """If force is true we should make a file even if there was a file."""
+    Configify.make(data=data, path=path)
+    Configify.make(data=data2, path=path, force=True)
+    assert os.path.exists(outpath)
