@@ -102,6 +102,13 @@ def test_arg_force_true_results_in_file():
     assert os.path.exists(outpath)
 
 
+def test_arg_force_true_creates_file_with_second_input_data():
+    """The file we made should have the data from the second call."""
+    Configify.make(data=data, path=path)
+    Configify.make(data=data2, path=path, force=True)
+    assert json.load(open(outpath)) == data2
+
+
 def test_teardown_tears_down():
     """If teardown works we should not have a file at this path."""
     assert not os.path.exists(outpath)
