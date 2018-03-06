@@ -68,7 +68,7 @@ def test_arg_filename_blank_returns_config():
 def test_arg_filename_supplied_returns_arg_in_returned_dict():
     """Should get dict with first key returning the input filename."""
     assert 'spam' in list(Configify.make(
-        data=data, get=True, filename='spam').keys())[0].split('.')[0]
+        data=data, get=True, filename='spam', path=path).keys())[0].split('.')[0]
 
 
 def test_args_filename_and_path_concat_in_returned_dict():
