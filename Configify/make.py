@@ -17,16 +17,22 @@ import os.path
 
 
 def __generate_file(data, outpath, format):
+    """Generate the file."""
     f = open(outpath, 'w')
     f.write(str(json.dumps(data)))
 
+
+def __prompt(context, data):
+    """Prompt the user for input from a context (TTY, app, SMS, API etc)."""
+    pass
 
 def make(
         data,
         filename='config',
         path='',
         get=False,
-        force=False):
+        force=False,
+        promptcontext='TTY'):
     """Make a file at the system path specified, or where run from."""
     # Variables formatting
     # we only support json, but should abstract for later.
@@ -37,6 +43,8 @@ def make(
     # handle data
     if not isinstance(data, dict):
         raise TypeError("'data' argument must be a python dictionary.")
+
+    __prompt(context=promptcontext, data=data)
 
     # handle file exists
     if os.path.isfile(outpath) and force is False:
