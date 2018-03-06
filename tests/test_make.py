@@ -13,13 +13,12 @@ data = {'spam': 'bacon', 'ham': 'eggs'}
 
 
 def setup_function(function):
-    """ set up any state that was previously setup with a setup_function call.
-    """
+    """Set up any state that was previously setup with a setup_function call."""
     pass
 
+
 def teardown_function(function):
-    """ tear down any state that was previously setup with a setup_function call.
-    """
+    """Tear down any state that was previously setup with a setup_function call."""
     try:
         os.remove(outpath)
     except OSError:
@@ -28,6 +27,7 @@ def teardown_function(function):
         os.remove('tests/spam.json')
     except OSError:
         pass
+
 
 def test_args_none():
     """Should return TypeError."""
@@ -94,5 +94,3 @@ def test_if_file_exists_returns_error():
     data2 = {'spam': 'baked beans', 'ham': 'sausage'}
     with pytest.raises(Exception):
         Configify.make(data=data2, path=path)
-
-
