@@ -12,8 +12,21 @@ outpath = '{p}{fn}.{fmt}'.format(p=path, fn=filename, fmt=format)
 data = {'spam': 'bacon', 'ham': 'eggs'}
 
 
+def setup_function(function):
+    """ set up any state that was previously setup with a setup_function call.
+    """
+    try:
+        os.remove(outpath)
+    except OSError:
+        pass
+    try:
+        os.remove('tests/spam.json')
+    except OSError:
+        pass
+
+
 def teardown_function(function):
-    """ teardown any state that was previously setup with a setup_function call.
+    """ tear down any state that was previously setup with a setup_function call.
     """
     try:
         os.remove(outpath)
