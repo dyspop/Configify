@@ -16,9 +16,11 @@ Key caveats:
 * Outputs your configuration data to the screen in some cases.
 * Only supports json
 * Only available for python.
-* You want this module to prompt from TTY. 
+* You want this module to prompt from TTY.
+* You're on a 'NIX system.
+* You're okay figuring out how to make forcing a configuration regeneration for the user on your own.
 
-These are intended to be developed further, but in this state it should be useful nonetheless.
+These are intended to guide feature development for future versions, but in this state it should be useful nonetheless.
 
 ## Installation
 
@@ -26,7 +28,7 @@ These are intended to be developed further, but in this state it should be usefu
 
 ## Usage
 
-To just prompt your end user, you put this code in your app/package:
+To prompt and generate a configuration but not load it into the package/app context use:
 
     import Configify
 
@@ -37,7 +39,7 @@ To just prompt your end user, you put this code in your app/package:
 
     Configify.make(template)
 
-To generate a configuration and load the new configuration data into the app context otherwise just use:
+To prompt and generate a configuration then load the new configuration data into the package/app context use:
 
     config = Configify.make(template, get=True)
 
@@ -47,12 +49,12 @@ and the end user will be prompted with:
     (return for default "default")': ▋userinput
     Enter value for "username"
     (return for default "default")': 
-    Set "username" to "userinput" in config.json
+    Set "username" to "userinput" in ./config.json
     Enter value for "password"
     (return for default "anotherdefault")': ▋anotheruserinput
     Enter value for "password"
     (return for default "anotherdefault")': 
-    Set "password" to "anotheruserinput" in config.json
+    Set "password" to "anotheruserinput" in ./config.json
 
 and generate a `config.json` file:
 
@@ -73,47 +75,46 @@ template = {
     'PORT': '3000',
     'DEBUG': 'True'
 }
-Configify.make(data=template, filename='appconfig.json')
+Configify.make(data=template, filename='appconfig')
 Enter value for "PORT"
 (return for default "3000")': ▋8080
-Set "PORT" to "8080" in appconfig.json
+Set "PORT" to "8080" in ./appconfig.json
 Enter value for "DEBUG"
 (return for default "True")': ▋False
-Set "DEBUG" to "False" in appconfig.json
+Set "DEBUG" to "False" in ./appconfig.json
 ```
 ```
->>>Configify.make(data=template, path='~/Configs/')
+Configify.make(data=template, path='../configs/')
 Enter value for "username"
-(return for default "*******")': 
-🔑
-Set "username" to "***********" in config.json
-Enter value for "password"
-(return for default "***********")': 
-🔑
-Set "password" to "*****" in ~/Configs/config.json
-```
-```
->>>Configify.make(data=template, get=True')
+(return for default "default")': ▋userinput
 Enter value for "username"
-(return for default "*******")': 
-🔑
-Set "username" to "***********" in config.json
+(return for default "default")': 
+Set "username" to "userinput" in ../configs/config.json
 Enter value for "password"
-(return for default "***********")': 
-🔑
-Set "password" to "*****" in config.json
-{'template': {'username': 'userinput', password: 'otheruserinput'}}
+(return for default "anotherdefault")': ▋anotheruserinput
+Enter value for "password"
+(return for default "anotherdefault")': 
+Set "password" to "anotheruserinput" in ../configs/config.json
 ```
 ```
->>>Configify.make(data=template, char='ﷺ')
->>>Enter value for "username": 
-🔑
-Set username to "ﷺﷺﷺﷺﷺﷺﷺﷺﷺ" in config.json
->>>Enter value for "password":
-🔑
-Set password to "ﷺﷺﷺﷺﷺﷺﷺﷺﷺﷺ" in config.json
+Configify.make(data=template, get=True)
+Enter value for "username"
+(return for default "default")': ▋userinput
+Enter value for "username"
+(return for default "default")': 
+Set "username" to "userinput" in ./config.json
+Enter value for "password"
+(return for default "anotherdefault")': ▋anotheruserinput
+Enter value for "password"
+(return for default "anotherdefault")': 
+Set "password" to "anotheruserinput" in ./config.json
+{'./config.json': {'username': 'userinput', password: 'otheruserinput'}}
 ```
 
 ## Contributing
 
-Fork the source repository https://github.com/dyspop/Configify make a new branch and submit a pull request.
+1. Fork the source repository https://github.com/dyspop/Configify 
+2. Make a new branch
+3. Write the feature code
+4. Make sure you add some tests
+5. Submit a pull request with helpful notes about your feature and test
