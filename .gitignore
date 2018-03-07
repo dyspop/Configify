@@ -11,6 +11,9 @@ __pycache__/
 *.so
 *~
 
+# pypi
+.pypirc
+
 # due to using tox and pytest
 .tox
 .cache
