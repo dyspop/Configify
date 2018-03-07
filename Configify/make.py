@@ -40,7 +40,7 @@ def __validate_context(context):
         return False
 
 
-def __prompt(context, template):
+def __prompt(context, template, filename):
     """Prompt the user for input from a context (TTY, app, SMS, API etc)."""
     new_config = {}
     # loop through key-value pairs
@@ -101,7 +101,7 @@ def make(
 
     # handle context
     if __validate_context(promptcontext) is True:
-        __prompt(promptcontext, data)
+        __prompt(promptcontext, data, outpath)
     else:
         raise ValueError(
             "'promptcontext' argument must be one of {v}".format(
