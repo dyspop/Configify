@@ -79,7 +79,7 @@ def make(
 
     # handle context
     if __validate_context(promptcontext) is True:
-        data = __prompt(promptcontext, data, outpath)
+        __prompt(promptcontext, data, outpath)
     else:
         raise ValueError(
             "'promptcontext' argument must be one of {v}".format(
