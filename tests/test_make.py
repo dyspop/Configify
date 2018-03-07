@@ -125,6 +125,13 @@ def test_input_matches_output(monkeypatch):
     assert data == config[outpath]
 
 
+def test_tilde_path_raises_filenotfounderror(monkeypatch):
+    """Using a path with a tilde should result in a specific error."""
+    monkeypatch.setattr('builtins.input', lambda x: "Ex-parrot")
+    with pytest.raises(Exception):
+        Configify.make(data=data, path='~/')
+
+
 # Tests for features planned for future releases
 # unmark this and write a more complete test
 @pytest.mark.xfail
