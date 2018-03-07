@@ -37,32 +37,32 @@ def __prompt(context, template):
     new_config = {}
     # loop through key-value pairs
     for k, v in template.items():
-        # check if we're in the secret state
-        if secret is True:
-            # check that there's a default
-            if v != ('' or None or False):
-                # if there is then prompt with the default but obscured
-                prompt = prompt_text.format(k=k, v=__obscure(v, char))
-            else:
-                # but if there isn't one then don't try to display it
-                prompt = "'{k}: ".format(k=k)
-            # set the value of the user input, if not to the default
-            new_config[k] = getpass.getpass(prompt)
-        # if we're not handling secrets
-        else:
-            # don't obscure the default values if not secret
-            prompt = prompt_text.format(k=k, v=v)
-            new_config[k] = input(prompt)
+    # check if we're in the secret state
+    # if secret is True:
+    #     # check that there's a default
+    #     if v != ('' or None or False):
+    #         # if there is then prompt with the default but obscured
+    #         prompt = prompt_text.format(k=k, v=__obscure(v, char))
+    #     else:
+    #         # but if there isn't one then don't try to display it
+    #         prompt = "'{k}: ".format(k=k)
+    #     # set the value of the user input, if not to the default
+    #     new_config[k] = getpass.getpass(prompt)
+    # # if we're not handling secrets
+    # else:
+        # don't obscure the default values if not secret
+        prompt = prompt_text.format(k=k, v=v)
+        new_config[k] = input(prompt)
         # print the prompt
         print(prompt)
         # set the value of the user input, if not to the default
         # new_config[k] = func() or v
-        # if secret set the new value's display version to be obscured
-        if secret is True:
-            v_display = __obscure(new_config[k], char)
-        # if not don't obscure it
-        else:
-            v_display = new_config[k]
+    # if secret set the new value's display version to be obscured
+    # if secret is True:
+    #     v_display = __obscure(new_config[k], char)
+    # # if not don't obscure it
+    # else:
+        v_display = new_config[k]
         # print the results, but delete the extra line from the user if they entered the default
         if v == new_config[k]:
             print('\033[F')
