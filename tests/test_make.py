@@ -9,8 +9,8 @@ path = 'tests/'
 filename = 'config'
 format = 'json'
 outpath = '{p}{fn}.{fmt}'.format(p=path, fn=filename, fmt=format)
-data = {'spam': 'bacon', 'ham': 'eggs'}
-data2 = {'spam': 'baked beans', 'ham': 'sausage'}
+data = {'spam': 'sausage', 'ham': 'sausage'}
+data2 = {'spam': 'eggs', 'ham': 'baked beans'}
 
 def setup_function(function):
     """Set up a new state."""
@@ -112,15 +112,15 @@ def test_arg_force_true_results_in_file(monkeypatch):
 
 def test_arg_force_true_creates_file_with_second_input_data(monkeypatch):
     """The file we made should have the data from the second call."""
-    monkeypatch.setattr('builtins.input', lambda x: "Grab your egg-and-fours")
-    Configify.make(data=data, path=path)
-    Configify.make(data=data2, path=path, force=True)
-    assert json.load(open(outpath)) == data2
+    monkeypatch.setattr('builtins.input', lambda x: "sausage")
+    Configify.make(data=data2, path=path)
+    Configify.make(data=data, path=path, force=True)
+    assert json.load(open(outpath)) == data
 
 
 def test_input_matches_output(monkeypatch):
     """Do the file keys and values match the input."""
-    monkeypatch.setattr('builtins.input', lambda x: "Ni! Ni! Ni! nnnnNi!")
+    monkeypatch.setattr('builtins.input', lambda x: "sausage")
     config = Configify.make(data=data, path=path, get=True)
     assert data == config[outpath]
 
