@@ -140,6 +140,18 @@ def test_arg_promptcontext():
     assert Configify.make(data=data, path=path, promptcontext=True)
 
 
+# unmark this and write a more complete test
+@pytest.mark.xfail
+def test_path_expansion(monkeypatch):
+    """A 'NIX tilde should expand to the user path."""
+    monkeypatch.setattr('builtins.input', lambda x: "bacon")
+    tilde_path = '~/{p}'.format(p=path)
+    assert outpath.split('.')[0] == list(
+        Configify.make(
+            data=data, get=True, filename=filename, path=tilde_path
+        ).keys())[0].split('.')[0]
+
+
 # Test pytest itself
 def test_teardown_tears_down():
     """If teardown works we should not have a file at this path."""

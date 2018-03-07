@@ -22,6 +22,10 @@ prompt_text = """Enter value for \"{k}\"
 set_confirmation_text = "Set \"{k}\" to \"{v}\" in {f}"
 
 
+class FileNotFoundError(Exception):
+    pass
+
+
 def __obscure(string, char='*'):
     """Obscure the data for display."""
     return char * len(string)
@@ -29,7 +33,17 @@ def __obscure(string, char='*'):
 
 def __generate_file(data, outpath, format):
     """Generate the file."""
-    f = open(outpath, 'w')
+    try:
+        f = open(outpath, 'w')
+    except FileNotFoundError:
+        # Can't figure out how to write a test for this,
+        # See attempt at tests/test_make.py test_path_expansion
+        # outpath = os.path.expanduser(outpath)
+        # f = open(outpath, 'w')
+        # Using error and unsupporting expansion.
+        if '~' in outpath:
+            raise(FileNotFoundError, "'~' in path not supported.")
+
     f.write(str(json.dumps(data)))
 
 
@@ -59,7 +73,7 @@ def __prompt(context, template, filename):
 def make(
         data,
         filename='config',
-        path='.',
+        path='./',
         get=False,
         force=False):
     """Make a file at the system path specified, or where run from."""
@@ -72,6 +86,7 @@ def make(
     # we only support not secret but should abstract for later
     secret = False
     outpath = '{p}{fn}.{fmt}'.format(p=path, fn=filename, fmt=format)
+
 
     # Custom conditions and error handling
     # handle data
