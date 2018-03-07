@@ -12,13 +12,14 @@ outpath = '{p}{fn}.{fmt}'.format(p=path, fn=filename, fmt=format)
 data = {'spam': 'sausage', 'ham': 'sausage'}
 data2 = {'spam': 'eggs', 'ham': 'baked beans'}
 
+
 def setup_function(function):
     """Set up a new state."""
     pass
 
 
 def teardown_function(function):
-    """Tear down any state that was previously setup with a setup_function call."""
+    """Tear down state set up with a setup_function call or in function."""
     try:
         os.remove(outpath)
     except OSError:
@@ -61,14 +62,17 @@ def test_get_gets_dict(monkeypatch):
 def test_arg_filename_blank_returns_config(monkeypatch):
     """Should get something called 'config' if there's no argument."""
     monkeypatch.setattr('builtins.input', lambda x: "Spam, spam, spam, spam.")
-    assert 'config' in list(Configify.make(data=data, path=path, get=True).keys())[0]
+    assert 'config' in list(
+        Configify.make(data=data, path=path, get=True).keys())[0]
 
 
 def test_arg_filename_supplied_returns_arg_in_returned_dict(monkeypatch):
     """Should get dict with first key returning the input filename."""
-    monkeypatch.setattr('builtins.input', lambda x: "cabbage crates coming over the briny?")
+    monkeypatch.setattr(
+        'builtins.input', lambda x: "cabbage crates coming over the briny?")
     assert 'spam' in list(Configify.make(
-        data=data, get=True, filename='spam', path=path).keys())[0].split('.')[0]
+        data=data, get=True, filename='spam', path=path
+    ).keys())[0].split('.')[0]
 
 
 def test_args_filename_and_path_concat_in_returned_dict(monkeypatch):
@@ -89,14 +93,16 @@ def test_file_creation(monkeypatch):
 
 def test_file_is_valid_format_json(monkeypatch):
     """We should get a valid json file created."""
-    monkeypatch.setattr('builtins.input', lambda x: "sausage squad up the blue end?")
+    monkeypatch.setattr(
+        'builtins.input', lambda x: "sausage squad up the blue end?")
     Configify.make(data=data, path=path)
     assert json.load(open(outpath))
 
 
 def test_if_file_exists_returns_error(monkeypatch):
     """If there is already a file we should not rewrite it."""
-    monkeypatch.setattr('builtins.input', lambda x: "Bunch of monkeys on the ceiling")
+    monkeypatch.setattr(
+        'builtins.input', lambda x: "Bunch of monkeys on the ceiling")
     Configify.make(data=data, path=path)
     with pytest.raises(Exception):
         Configify.make(data=data2, path=path)
@@ -104,7 +110,8 @@ def test_if_file_exists_returns_error(monkeypatch):
 
 def test_arg_force_true_results_in_file(monkeypatch):
     """If force is true we should make a file even if there was a file."""
-    monkeypatch.setattr('builtins.input', lambda x: "let's get the bacon delivered!")
+    monkeypatch.setattr(
+        'builtins.input', lambda x: "let's get the bacon delivered!")
     Configify.make(data=data, path=path)
     Configify.make(data=data2, path=path, force=True)
     assert os.path.exists(outpath)

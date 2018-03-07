@@ -23,6 +23,8 @@ set_confirmation_text = "Set \"{k}\" to \"{v}\" in {f}"
 
 
 class FileNotFoundError(Exception):
+    """Custom error."""
+
     pass
 
 
@@ -63,7 +65,8 @@ def __prompt(context, template, filename):
         new_config[k] = input(prompt)
         print(prompt)
         v_display = new_config[k]
-        # print the results, but delete the extra line from the user if they entered the default
+        # print the results, but delete the extra line from the user
+        # if they entered the default
         if v == new_config[k]:
             print('\033[F')
         print(set_confirmation_text.format(k=k, v=v_display, f=filename))
@@ -86,7 +89,6 @@ def make(
     # we only support not secret but should abstract for later
     secret = False
     outpath = '{p}{fn}.{fmt}'.format(p=path, fn=filename, fmt=format)
-
 
     # Custom conditions and error handling
     # handle data
