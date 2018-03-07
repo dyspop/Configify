@@ -88,7 +88,7 @@ def make(
     # handle file exists
     if os.path.isfile(outpath) and force is False:
         raise Exception(
-            "{f} exists. Use Configify.make(force=True) to override.".format(
+            "'{f}'' exists. Use force=True to override.".format(
                 f=outpath))
 
     __generate_file(data, outpath, format)
