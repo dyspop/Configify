@@ -7,11 +7,11 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
         long_description = f.read()
 
 setup(
-    name='Configify',
+    name='figgy',
     version='0.0.1.dev1',
     description='Allows end-user Configuration generation for development.',
     long_description=long_description,
-    url='https://github.com/dyspop/Configify',
+    url='https://github.com/dyspop/figgy',
     author='Dan Black',
     author_email='dyspop@gmail.com',
     license='GPL-3.0+',
@@ -33,5 +33,5 @@ setup(
     keywords=['config', 'configuration generator', 'dev tool', 'json'],
     packages=find_packages(exclude=[]),
     install_requires=[],
-    download_url='https://github.com/dyspop/Configify/archive/0.0.1dev1.tar.gz'
+    download_url='https://github.com/dyspop/figgy/archive/0.0.1dev1.tar.gz'
 )

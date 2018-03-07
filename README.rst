@@ -1,18 +1,18 @@
-Configify
-=========
+figgy
+=====
 
 Are you sick and tired of writing packages or apps that are super great
 but don’t work unless your end-user scours your README for instructions
 on how to structure config files and how and where to instantiate them?
 
-Configify is the app and package configuration generator package
-developed for developers who develop apps and/or packages for use by
-other developers.
+figgy is the app and package configuration generator package developed
+for developers who develop apps and/or packages for use by other
+developers.
 
-Configify allows you to ship code and have the end-user developer
-install and configure it just by running your app or package. You can
-call it from setup.py or bind it to whatever you like in your code so
-the results of the new configuration are made immediately available to
+figgy allows you to ship code and have the end-user developer install
+and configure it just by running your app or package. You can call it
+from setup.py or bind it to whatever you like in your code so the
+results of the new configuration are made immediately available to
 whatever context the app or package will be used in.
 
 --------------
@@ -37,7 +37,7 @@ Installation
 
 ::
 
-    pip install git+git://github.com/dyspop/Configify
+    pip install git+git://github.com/dyspop/figgy
 
 Usage
 -----
@@ -47,21 +47,21 @@ package/app context use:
 
 ::
 
-    import Configify
+    import figgy
 
     template = {
         'username': 'default',
         'password': 'anotherdefault'
     }
 
-    Configify.make(template)
+    figgy.make(template)
 
 To prompt and generate a configuration then load the new configuration
 data into the package/app context use:
 
 ::
 
-    config = Configify.make(template, get=True)
+    config = figgy.make(template, get=True)
 
 and the end user will be prompted with:
 
@@ -84,7 +84,7 @@ and generate a ``config.json`` file:
 
     {"username": "userinput", "password": "anotheruserinput"}
 
-By default Configify assumes a few things:
+By default figgy assumes a few things:
 
 -  You want the file to be named ``config.json``
 -  You want the file generated at the path the python code that executes
@@ -101,7 +101,7 @@ But you can change most of that:
         'PORT': '3000',
         'DEBUG': 'True'
     }
-    Configify.make(data=template, filename='appconfig')
+    figgy.make(data=template, filename='appconfig')
     Enter value for "PORT"
     (return for default "3000")': ▋8080
     Set "PORT" to "8080" in ./appconfig.json
@@ -111,7 +111,7 @@ But you can change most of that:
 
 ::
 
-    Configify.make(data=template, path='../configs/')
+    figgy.make(data=template, path='../configs/')
     Enter value for "username"
     (return for default "default")': ▋userinput
     Enter value for "username"
@@ -125,7 +125,7 @@ But you can change most of that:
 
 ::
 
-    Configify.make(data=template, get=True)
+    figgy.make(data=template, get=True)
     Enter value for "username"
     (return for default "default")': ▋userinput
     Enter value for "username"
@@ -141,7 +141,7 @@ But you can change most of that:
 Contributing
 ------------
 
-1. Fork the source repository https://github.com/dyspop/Configify
+1. Fork the source repository https://github.com/dyspop/figgy
 2. Make a new branch
 3. Write the feature code
 4. Make sure you add some tests
