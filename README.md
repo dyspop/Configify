@@ -10,12 +10,12 @@ figgy allows you to ship code and have the end-user developer install and config
 
 ## Warning
 
-This software is in alpha development. This should work, please report bugs. 
+This software is in beta development. That said, this package should work. Please report bugs.
 
 Key caveats:
 * Outputs your configuration data to the screen in some cases.
 * Only supports json
-* Only available for python.
+* Only available for python 3.
 * You want this module to prompt from TTY.
 * You're on a 'NIX system.
 * You're okay figuring out how to make forcing a configuration regeneration for the user on your own.
@@ -24,7 +24,7 @@ These are intended to guide feature development for future versions, but in this
 
 ## Installation
 
-    pip install git+git://github.com/dyspop/figgy
+    pip install figgy
 
 ## Usage
 
