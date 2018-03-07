@@ -8,7 +8,7 @@ Configify allows you to ship code and have the end-user developer install and co
 
 ## Installation
 
-not yet...
+pip install git+git://github.com/dyspop/Configify
 
 ## Usage
 
