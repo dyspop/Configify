@@ -20,14 +20,12 @@ def setup_function(function):
 
 def teardown_function(function):
     """Tear down state set up with a setup_function call or in function."""
-    try:
-        os.remove(outpath)
-    except OSError:
-        pass
-    try:
-        os.remove('tests/spam.json')
-    except OSError:
-        pass
+    files = [outpath, 'tests/spam.json']
+    for f in files:
+        try:
+            os.remove(f)
+        except OSError:
+            pass
 
 
 def test_args_none():
