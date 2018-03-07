@@ -31,12 +31,13 @@ def make(
         filename='config',
         path='',
         get=False,
-        force=False,
-        promptcontext='TTY'):
+        force=False):
     """Make a file at the system path specified, or where run from."""
     # Variables formatting
     # we only support json, but should abstract for later.
     format = 'json'
+    # we only support TTY (terminal/shell/stdout/console), but should abstract for later.
+    promptcontext='TTY')
     outpath = '{p}{fn}.{fmt}'.format(p=path, fn=filename, fmt=format)
 
     # Custom conditions and error handling
