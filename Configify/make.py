@@ -17,6 +17,14 @@ import os.path
 
 
 valid_contexts = {'tty': input}
+prompt_text = """Enter value for \"{k}\"
+(return for default \"{v}\")': """
+set_confirmation_text = "Set \"{k}\" to \"{v}\" in {f}"
+
+
+def __obscure(string, char='*'):
+    """Obscure the data for display."""
+    return char * len(string)
 
 
 def __generate_file(data, outpath, format):
