@@ -118,13 +118,11 @@ def test_arg_force_true_creates_file_with_second_input_data(monkeypatch):
     assert json.load(open(outpath)) == data2
 
 
-def test_make_multiple_entries(monkeypatch):
+def test_input_matches_output(monkeypatch):
     """Do the file keys and values match the input."""
-    monkeypatch.setattr('builtins.input', lambda x: "bar")
-    config = Configify.make(path=path, data=data, get=True,)
-    config_from_sys = json.load(open(config_file))
-    config_from_test = eval(config[config_file])
-    assert config_from_test == config_from_sys
+    monkeypatch.setattr('builtins.input', lambda x: "Ni! Ni! Ni! nnnnNi!")
+    config = Configify.make(data=data, path=path, get=True)
+    assert data == config[outpath]
 
 
 # Tests for features planned for future releases
