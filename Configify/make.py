@@ -18,6 +18,7 @@ import os.path
 
 valid_contexts = ['tty']
 
+
 def __generate_file(data, outpath, format):
     """Generate the file."""
     f = open(outpath, 'w')
@@ -29,6 +30,7 @@ def __validate_context(context):
         return True
     else:
         return False
+
 
 def __prompt(context, data):
     """Prompt the user for input from a context (TTY, app, SMS, API etc)."""
@@ -45,8 +47,9 @@ def make(
     # Variables formatting
     # we only support json, but should abstract for later.
     format = 'json'
-    # we only support TTY (terminal/shell/stdout/console), but should abstract for later.
-    promptcontext='TTY'
+    # we only support TTY (terminal/shell/stdout/console),
+    # but should abstract for later.
+    promptcontext = 'TTY'
     outpath = '{p}{fn}.{fmt}'.format(p=path, fn=filename, fmt=format)
 
     # Custom conditions and error handling
@@ -64,7 +67,9 @@ def make(
 
     # handle file exists
     if os.path.isfile(outpath) and force is False:
-        raise Exception("File {f} exists. Use Configify.make(force=True) to override.".format(f=outpath))
+        raise Exception(
+            "{f} exists. Use Configify.make(force=True) to override.".format(
+                f=outpath))
 
     __generate_file(data, outpath, format)
 
