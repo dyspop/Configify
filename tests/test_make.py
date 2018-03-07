@@ -109,6 +109,22 @@ def test_arg_force_true_creates_file_with_second_input_data():
     assert json.load(open(outpath)) == data2
 
 
+# Tests for features planned for future releases
+# unmark this and write a more complete test
+@pytest.mark.xfail
+def test_arg_format():
+    """The promptcontext argument is not supported yet."""
+    assert Configify.make(data=data, path=path, promptcontext=True)
+
+
+# unmark this and write a more complete test
+@pytest.mark.xfail
+def test_arg_promptcontext():
+    """The promptcontext argument is not supported yet."""
+    assert Configify.make(data=data, path=path, promptcontext=True)
+
+
+# Test pytest itself
 def test_teardown_tears_down():
     """If teardown works we should not have a file at this path."""
     assert not os.path.exists(outpath)
