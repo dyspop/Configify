@@ -31,7 +31,9 @@ setup(
         'Programming Language :: Python :: 3.6',
     ],
     keywords=['config', 'configuration generator', 'dev tool', 'json'],
-    project_urls={ 'Documentation': 'https://github.com/dyspop/Configify/README.md' },
+    project_urls={
+        'Documentation': 'https://github.com/dyspop/Configify/README.md'},
     packages=find_packages(exclude=[]),
-    install_requires=[]
+    install_requires=[],
+    download_url='https://github.com/dyspop/Configify/archive/0.0.1dev1.tar.gz'
 )
