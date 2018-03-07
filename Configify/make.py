@@ -55,10 +55,11 @@ def __prompt(context, template, filename):
         print(set_confirmation_text.format(k=k, v=v_display, f=filename))
     return new_config
 
+
 def make(
         data,
         filename='config',
-        path='',
+        path='.',
         get=False,
         force=False):
     """Make a file at the system path specified, or where run from."""
