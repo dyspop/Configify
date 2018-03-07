@@ -8,7 +8,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='figgy',
-    version='0.0.1.dev1',
+    version='0.1.1.dev1',
     description='Allows end-user Configuration generation for development.',
     long_description=long_description,
     url='https://github.com/dyspop/figgy',
@@ -33,5 +33,5 @@ setup(
     keywords=['config', 'configuration generator', 'dev tool', 'json'],
     packages=find_packages(exclude=[]),
     install_requires=[],
-    download_url='https://github.com/dyspop/figgy/archive/0.0.1dev1.tar.gz'
+    download_url='https://github.com/dyspop/figgy/archive/0.1.1dev1.tar.gz'
 )
