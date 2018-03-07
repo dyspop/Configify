@@ -16,7 +16,7 @@ import sys
 import os.path
 
 
-valid_contexts = ['tty']
+valid_contexts = {'tty': input}
 
 
 def __generate_file(data, outpath, format):
@@ -26,13 +26,13 @@ def __generate_file(data, outpath, format):
 
 
 def __validate_context(context):
-    if context.lower() in valid_contexts:
+    if context.lower() in valid_contexts.keys():
         return True
     else:
         return False
 
 
-def __prompt(context, data):
+def __prompt(context, template):
     """Prompt the user for input from a context (TTY, app, SMS, API etc)."""
     new_config = {}
     # loop through key-value pairs
@@ -77,11 +77,13 @@ def make(
         force=False):
     """Make a file at the system path specified, or where run from."""
     # Variables formatting
-    # we only support json, but should abstract for later.
+    # we only support json but should abstract for later.
     format = 'json'
     # we only support TTY (terminal/shell/stdout/console),
     # but should abstract for later.
     promptcontext = 'TTY'
+    # we only support not secret but should abstract for later
+    secret = False
     outpath = '{p}{fn}.{fmt}'.format(p=path, fn=filename, fmt=format)
 
     # Custom conditions and error handling
@@ -91,7 +93,7 @@ def make(
 
     # handle context
     if __validate_context(promptcontext) is True:
-        __prompt(context=promptcontext, data=data)
+        __prompt(promptcontext, data)
     else:
         raise ValueError(
             "'promptcontext' argument must be one of {v}".format(
