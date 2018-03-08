@@ -9,7 +9,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 setup(
     name='figgy',
     version='0.1.1.dev2',
-    description='Allows end-user Configuration generation for development.',
+    description='Enable end-user Configuration generation for development.',
     long_description=long_description,
     url='https://github.com/dyspop/figgy',
     author='Dan Black',
