@@ -61,8 +61,17 @@ def test_get_dict_value_is_dict(monkeypatch):
     """The value from dict should be a dict of the config from the user."""
     monkeypatch.setattr('builtins.input', lambda x: "Fish slap!")
     config = figgy.make(data=data, path=path, get=True)
-    dict_in_dict = config[list(config.keys())[0]]
-    assert isinstance(dict_in_dict, dict)
+    user_config = config[list(config.keys())[0]]
+    assert isinstance(user_config, dict)
+
+
+def test_all_defaults_input_returns_values(monkeypatch):
+    """Config values from default should match the defaults template."""
+    monkeypatch.setattr('builtins.input', lambda x: None)
+    config = figgy.make(data=data, path=path, get=True)
+    user_config = config[list(config.keys())[0]]
+    for k, v in data.items():
+        assert data[k] == user_config[k]
 
 
 def test_arg_filename_blank_returns_config(monkeypatch):
