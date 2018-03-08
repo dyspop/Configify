@@ -57,6 +57,14 @@ def test_get_gets_dict(monkeypatch):
     assert isinstance(figgy.make(data=data, path=path, get=True), dict)
 
 
+def test_get_dict_value_is_dict(monkeypatch):
+    """The value from dict should be a dict of the config from the user."""
+    monkeypatch.setattr('builtins.input', lambda x: "Fish slap!")
+    config = figgy.make(data=data, path=path, get=True)
+    dict_in_dict = config[list(config.keys())[0]]
+    assert isinstance(dict_in_dict, dict)
+
+
 def test_arg_filename_blank_returns_config(monkeypatch):
     """Should get something called 'config' if there's no argument."""
     monkeypatch.setattr('builtins.input', lambda x: "Spam, spam, spam, spam.")
