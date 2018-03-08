@@ -62,7 +62,7 @@ def __prompt(context, template, filename):
     # loop through key-value pairs
     for k, v in template.items():
         prompt = prompt_text.format(k=k, v=v)
-        new_config[k] = input(prompt)
+        new_config[k] = input(prompt) or v
         print(prompt)
         v_display = new_config[k]
         # print the results, but delete the extra line from the user
