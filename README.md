@@ -10,7 +10,7 @@ figgy allows you to ship code and have the end-user developer install and config
 
 ## Warning
 
-This software is in beta development. That said, this package should work. Please report bugs.
+This software is in alpha development. That said, this package should work. Please report bugs.
 
 Key caveats:
 * Outputs your configuration data to the screen in some cases.

@@ -20,7 +20,7 @@ whatever context the app or package will be used in.
 Warning
 -------
 
-This software is in beta development. That said, this package should
+This software is in alpha development. That said, this package should
 work. Please report bugs.
 
 Key caveats: \* Outputs your configuration data to the screen in some

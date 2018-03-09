@@ -3,13 +3,15 @@ from os import path
 
 here = path.abspath(path.dirname(__file__))
 
-with open(path.join(here, 'README.md'), encoding='utf-8') as f:
+version = '0.1.2.dev2'
+
+with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
         long_description = f.read()
 
 setup(
     name='figgy',
-    version='0.1.2.dev1',
-    description='Enable end-user Configuration generation for development.',
+    version=version,
+    description='Prompt-based end-user configuration generator.',
     long_description=long_description,
     url='https://github.com/dyspop/figgy',
     author='Dan Black',
@@ -19,10 +21,7 @@ setup(
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Build Tools',
-        'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.6',
-        'Programming Language :: Python :: 2.7',
+        'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.2',
         'Programming Language :: Python :: 3.3',
@@ -30,8 +29,8 @@ setup(
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
     ],
-    keywords=['config', 'configuration generator', 'dev tool', 'json'],
+    keywords=['config', 'configuration', 'generator', 'configuration generator', 'dev tool', 'json', 'tty', 'cli-like'],
     packages=find_packages(exclude=[]),
     install_requires=[],
-    download_url='https://github.com/dyspop/figgy/archive/0.1.2dev1.tar.gz'
+    download_url='https://github.com/dyspop/figgy/archive/{v}.tar.gz'.format(v=version)
 )
