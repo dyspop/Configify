@@ -1,8 +1,8 @@
 # figgy
 
-Are you sick and tired of writing packages or apps that are super great but don't work unless your end-user scours your README for instructions on how to structure config files and how and where to instantiate them? 
+Populates configs for an app at first-time setup.
 
-figgy is the app and package configuration generator package developed for developers who develop apps and/or packages for use by other developers.
+Are you sick and tired of writing packages or apps that are super great but don't work unless your end-user scours your README for instructions on how to structure config files and how and where to instantiate them? 
 
 figgy allows you to ship code and have the end-user developer install and configure it just by running your app or package. You can call it from setup.py or bind it to whatever you like in your code so the results of the new configuration are made immediately available to whatever context the app or package will be used in.
 
