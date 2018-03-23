@@ -28,20 +28,20 @@ These are intended to guide feature development for future versions, but in this
 
 ## Usage
 
-To prompt and generate a configuration but not load it into the package/app context use:
+First import figgy
 
     import figgy
+
+Then define your config template
 
     template = {
         'username': 'default',
         'password': 'anotherdefault'
     }
 
+All you need to do is call `make()`.
+
     figgy.make(template)
-
-To prompt and generate a configuration then load the new configuration data into the package/app context use:
-
-    config = figgy.make(template, get=True)
 
 and the end user will be prompted with:
 
@@ -60,55 +60,80 @@ and generate a `config.json` file:
 
     {"username": "userinput", "password": "anotheruserinput"}
 
+If you want the data to be used in the application after it's created use 
+
+    config = figgy.make(template)
+
+so that you can access the data like so
+
+    username = config['username']
+    password = config['password']
+
 By default figgy assumes a few things:
 
 * You want the file to be named `config.json`
 * You want the file generated at the path the python code that executes it runs from
-* You don't want to return the configuration data itself to the application context
-* The user interface is TTY. 
+* You want the function to return the configuration data
+* The user interface is TTY
 
 But you can change most of that:
 
-
+source code:
 ```
 template = {
     'PORT': '3000',
     'DEBUG': 'True'
 }
 figgy.make(data=template, filename='appconfig')
+```
+prompts:
+```
 Enter value for "PORT"
 (return for default "3000")': ▋8080
 Set "PORT" to "8080" in ./appconfig.json
 Enter value for "DEBUG"
 (return for default "True")': ▋False
-Set "DEBUG" to "False" in ./appconfig.json
 ```
+and returns:
+```
+Set "DEBUG" to "False" in ./appconfig.json
+{'./appconfig.json': {'PORT': '3000', 'DEBUG': 'True'}}
+```
+---
+source code:
 ```
 figgy.make(data=template, path='../configs/')
 Enter value for "username"
+```
+prompts:
+```
 (return for default "default")': ▋userinput
-Enter value for "username"
-(return for default "default")': 
 Set "username" to "userinput" in ../configs/config.json
 Enter value for "password"
 (return for default "anotherdefault")': ▋anotheruserinput
-Enter value for "password"
-(return for default "anotherdefault")': 
 Set "password" to "anotheruserinput" in ../configs/config.json
 ```
+and returns
 ```
-figgy.make(data=template, get=True)
+{'./config.json': {'username': 'userinput', password: 'otheruserinput'}}
+```
+---
+source code:
+```
+figgy.make(data=template, get=False)
+```
+generates the prompts:
+```
 Enter value for "username"
 (return for default "default")': ▋userinput
-Enter value for "username"
-(return for default "default")': 
 Set "username" to "userinput" in ./config.json
 Enter value for "password"
 (return for default "anotherdefault")': ▋anotheruserinput
-Enter value for "password"
-(return for default "anotherdefault")': 
 Set "password" to "anotheruserinput" in ./config.json
-{'./config.json': {'username': 'userinput', password: 'otheruserinput'}}
+```
+and returns:
+```
+None
 ```
 
 ## Contributing
