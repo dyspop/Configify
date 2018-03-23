@@ -3,7 +3,7 @@ from os import path
 
 here = path.abspath(path.dirname(__file__))
 
-version = '0.1.2.dev2'
+version = '0.2.0.rc1'
 
 with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
         long_description = f.read()
@@ -11,7 +11,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 setup(
     name='figgy',
     version=version,
-    description='Prompt-based end-user configuration generator.',
+    description='Creates and populates configs for an app at first-time setup.',
     long_description=long_description,
     url='https://github.com/dyspop/figgy',
     author='Dan Black',
