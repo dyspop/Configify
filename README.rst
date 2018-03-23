@@ -21,11 +21,13 @@ Warning
 This software is in alpha development. That said, this package should
 work. Please report bugs.
 
-Key caveats: \* Outputs your configuration data to the screen in some
-cases. \* Only supports json \* Only available for python 3. \* You want
-this module to prompt from TTY. \* You’re on a ’NIX system. \* You’re
-okay figuring out how to make forcing a configuration regeneration for
-the user on your own.
+Key caveats: 
+- Outputs your configuration data to the screen in some
+cases.
+- Only supports json.
+- Only available for python 3. 
+- You want this module to prompt from TTY. 
+- You’re on a ’NIX system.
 
 These are intended to guide feature development for future versions, but
 in this state it should be useful nonetheless.

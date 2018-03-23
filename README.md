@@ -18,7 +18,6 @@ Key caveats:
 * Only available for python 3.
 * You want this module to prompt from TTY.
 * You're on a 'NIX system.
-* You're okay figuring out how to make forcing a configuration regeneration for the user on your own.
 
 These are intended to guide feature development for future versions, but in this state it should be useful nonetheless.
 
