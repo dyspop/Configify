@@ -1,6 +1,6 @@
 # figgy
 
-Populates configs for an app at first-time setup.
+Creates and populates configs for an app at first-time setup.
 
 Are you sick and tired of writing packages or apps that are super great but don't work unless your end-user scours your README for instructions on how to structure config files and how and where to instantiate them? 
 
