@@ -77,7 +77,7 @@ def make(
         data,
         filename='config',
         path='./',
-        get=False,
+        get=True,
         force=False):
     """Make a file at the system path specified, or where run from."""
     # Variables formatting
