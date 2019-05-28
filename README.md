@@ -27,6 +27,18 @@ These are intended to guide feature development for future versions, but in this
 
 ## Usage
 
+
+    import figgy
+    template = {
+        'username': 'default',
+        'password': 'anotherdefault'
+    }
+    try:
+        credentials = json.load(open('secret.json'))
+    except:
+        figgy.make(template, filename='secret')
+
+
 First import figgy
 
     import figgy
